@@ -1,6 +1,6 @@
 # tax-tables-screen-scrapper
 
-This tool screen scrapes (incometaxpro.net)[https://www.incometaxpro.net/tax-rates/] pages and turns it into the JSON structure used by (taxee)[https://github.com/taxee/taxee-tax-statistics/tree/master/src/statistics/2018].
+This tool screen scrapes [incometaxpro.net](https://www.incometaxpro.net/tax-rates/) pages and turns it into the JSON structure used by [taxee](https://github.com/taxee/taxee-tax-statistics/tree/master/src/statistics/2018).
 
 ## Getting Started
 
@@ -11,6 +11,6 @@ This tool screen scrapes (incometaxpro.net)[https://www.incometaxpro.net/tax-rat
 
 ## Debugging Tips
 
-- Install (ndb)[https://github.com/GoogleChromeLabs/ndb]
+- Install [ndb](https://github.com/GoogleChromeLabs/ndb)
 - Set any desired breakpoints in the code using `debugger;`;
 - Run `ndb npm start`;
