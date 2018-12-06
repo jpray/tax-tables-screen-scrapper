@@ -31,7 +31,7 @@ async function getHtmlForState(stateName) {
             .then(res => res.text());
 } 
 
-// this matches the taxee structure that we are using in covered
+// this matches the taxee structure
 // we will only be trying to update the "income_tax_brackets" array
 //
 // Note that the objects within "income_tax_brackets" should be of this form:
