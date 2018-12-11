@@ -107,7 +107,7 @@ function getIncomeTaxBracketsForFilingStatus(filingStatusName, html) {
 
     lists.slice(0,-1).forEach(e => {
         let level = e.split('<td>').map(el => {
-            return el.split('</td>')[0].replace('$','').replace(',','');
+            return el.split('</td>')[0].replace('$','').replace(/,/g, '');
         });
         let bracket = parseFloat(level[1]);
         let rate = parseFloat(level[4]);
