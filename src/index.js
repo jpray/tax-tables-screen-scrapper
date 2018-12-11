@@ -5,7 +5,6 @@ const rimraf = require('rimraf');
 //get the state names we want to run this scrapper for
 const statesRaw = fs.readFileSync('./src/state-names.json');
 const stateNames = JSON.parse(statesRaw);
-
 //setup some string constants for use later
 const SINGLE = 'single';
 const MARRIED_FILING_JOINTLY = 'married';
@@ -40,6 +39,7 @@ async function getHtmlForState(stateName) {
 //     "marginal_rate": <Number>
 //  }
 //
+
 function getBareOutputStructure() {
     return {
         "single": {
@@ -73,9 +73,48 @@ function getBareOutputStructure() {
     }
 }
 
+function getBareOutputStructureNoTax() {
+    return {
+        "single": {
+            "type": "none",
+        },
+        "married": {
+            "type": "none",
+        },
+        "married_separately": {
+            "type": "none",
+        },
+        "head_of_household": {
+            "type": "none",
+        }
+    }
+}
 
 function getIncomeTaxBracketsForFilingStatus(filingStatusName, html) {
-    const brackets = []
+
+    let brackets = []
+    let contentBlocks = html.split('<table class="statebrackets">').map(e => '<table class="statebrackets">'+e);
+
+    let contentBlock;
+    if(filingStatusName === 4) {
+        contentBlock = contentBlocks[4].split('</table>').map(e => e+'</table>')[0];
+    } else {
+        contentBlock = contentBlocks[filingStatusName];
+    }
+
+    let listBlock = contentBlock.split('<tbody>')[1].split('</tbody>')[0];
+    let lists = listBlock.split('</td></tr>').map(e => e+'</td></tr>');
+
+    lists.slice(0,-1).forEach(e => {
+        let level = e.split('<td>').map(el => {
+            return el.split('</td>')[0].replace('$','').replace(',','');
+        });
+        let bracket = parseFloat(level[1]);
+        let rate = parseFloat(level[4]);
+        let bracketFormat = bracket ? bracket-1 : bracket;
+        brackets = [...brackets, {bracket: bracketFormat, marginal_rate: rate}] 
+    });
+
     // Start of parsing magic
     debugger;
     //End of parsing magic
@@ -90,13 +129,18 @@ function getIncomeTaxBracketsForFilingStatus(filingStatusName, html) {
     let stateName;
     for (let i=0; i<stateNames.length; i++) {
         stateName = stateNames[i];
-        const html = await getHtmlForState(stateName);
+        const html = await getHtmlForState(stateName[0]);
         const output = getBareOutputStructure();
-        output[SINGLE][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(INCOMETAXPRO_FILING_STATUSES_MAP[SINGLE], html);
-        output[MARRIED_FILING_JOINTLY][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(INCOMETAXPRO_FILING_STATUSES_MAP[MARRIED_FILING_JOINTLY], html);
-        output[MARRIED_FILING_SEPARATELY][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(INCOMETAXPRO_FILING_STATUSES_MAP[MARRIED_FILING_SEPARATELY], html);
-        output[HEAD_OF_HOUSEHOLD][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(INCOMETAXPRO_FILING_STATUSES_MAP[HEAD_OF_HOUSEHOLD], html);
-        writeOutputToDisk(stateName, output);
+        const outputNone = getBareOutputStructureNoTax();
+        output[SINGLE][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(1, html);
+        output[MARRIED_FILING_JOINTLY][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(2, html);
+        output[MARRIED_FILING_SEPARATELY][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(3, html);
+        output[HEAD_OF_HOUSEHOLD][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(4, html);
+        if(output[SINGLE][INCOME_TAX_BRACKETS].length === 1 && output[SINGLE][INCOME_TAX_BRACKETS][0].bracket === 0 && output[SINGLE][INCOME_TAX_BRACKETS][0].marginal_rate === 0) {
+            writeOutputToDisk(stateName[1], outputNone);
+        } else {
+            writeOutputToDisk(stateName[1], output);
+        }
     }
 
 })();
