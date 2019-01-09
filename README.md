@@ -9,6 +9,9 @@ This tool screen scrapes [incometaxpro.net](https://www.incometaxpro.net/tax-rat
 - Run `npm start` to run the program.
 - Output files will be put in the "output" folder
 
+## Generate CSV
+- `npm run create-csv`
+
 ## Debugging Tips
 
 - Install [ndb](https://github.com/GoogleChromeLabs/ndb)
