@@ -1,0 +1,250 @@
+{
+    "single": {
+        "medicare_brackets": [
+            {
+                "bracket": 0,
+                "marginal_rate": 2.9,
+                "amount": 0
+            },
+            {
+                "bracket": 200000,
+                "marginal_rate": 3.8,
+                "amount": 5800
+            }
+        ],
+        "income_tax_brackets": [
+            {
+                "bracket": 0,
+                "marginal_rate": 10
+            },
+            {
+                "bracket": 9701,
+                "marginal_rate": 12
+            },
+            {
+                "bracket": 39476,
+                "marginal_rate": 22
+            },
+            {
+                "bracket": 84201,
+                "marginal_rate": 24
+            },
+            {
+                "bracket": 160726,
+                "marginal_rate": 32
+            },
+            {
+                "bracket": 204101,
+                "marginal_rate": 35
+            },
+            {
+                "bracket": 510301,
+                "marginal_rate": 37
+            }
+        ],
+        "deductions": [
+            {
+                "deduction_name": "Standard Deduction (Single)",
+                "deduction_amount": 12200
+            }
+        ],
+        "exemptions": [
+            {
+                "exemption_name": "Standard Exemption (Single)",
+                "exemption_amount": 0
+            }
+        ],
+        "childCredit": 2000,
+        "childReduction": 50,
+        "childPhaseOut": 200000,
+        "socialSecurityMax": 128400,
+        "socialSecurityRate": 12.4,
+        "taxableFicaRate": 92.35
+    },
+    "married": {
+        "medicare_brackets": [
+            {
+                "bracket": 0,
+                "marginal_rate": 2.9,
+                "amount": 0
+            },
+            {
+                "bracket": 250000,
+                "marginal_rate": 3.8,
+                "amount": 9500
+            }
+        ],
+        "income_tax_brackets": [
+            {
+                "bracket": 0,
+                "marginal_rate": 10
+            },
+            {
+                "bracket": 19401,
+                "marginal_rate": 12
+            },
+            {
+                "bracket": 78951,
+                "marginal_rate": 22
+            },
+            {
+                "bracket": 168401,
+                "marginal_rate": 24
+            },
+            {
+                "bracket": 321451,
+                "marginal_rate": 32
+            },
+            {
+                "bracket": 408201,
+                "marginal_rate": 35
+            },
+            {
+                "bracket": 612351,
+                "marginal_rate": 37
+            }
+        ],
+        "deductions": [
+            {
+                "deduction_name": "Standard Deduction (Married)",
+                "deduction_amount": 24400
+            }
+        ],
+        "exemptions": [
+            {
+                "exemption_name": "Standard Exemption (Single)",
+                "exemption_amount": 0
+            }
+        ],
+        "childCredit": 2000,
+        "childReduction": 50,
+        "childPhaseOut": 400000,
+        "socialSecurityMax": 128400,
+        "socialSecurityRate": 12.4,
+        "taxableFicaRate": 92.35
+    },
+    "married_separately": {
+        "medicare_brackets": [
+            {
+                "bracket": 0,
+                "marginal_rate": 2.9,
+                "amount": 0
+            },
+            {
+                "bracket": 125000,
+                "marginal_rate": 3.8,
+                "amount": 3625
+            }
+        ],
+        "income_tax_brackets": [
+            {
+                "bracket": 0,
+                "marginal_rate": 10
+            },
+            {
+                "bracket": 9701,
+                "marginal_rate": 12
+            },
+            {
+                "bracket": 39476,
+                "marginal_rate": 22
+            },
+            {
+                "bracket": 84201,
+                "marginal_rate": 24
+            },
+            {
+                "bracket": 160726,
+                "marginal_rate": 32
+            },
+            {
+                "bracket": 204101,
+                "marginal_rate": 35
+            },
+            {
+                "bracket": 306176,
+                "marginal_rate": 37
+            }
+        ],
+        "deductions": [
+            {
+                "deduction_name": "Standard Deduction (Married Filing Separately)",
+                "deduction_amount": 12200
+            }
+        ],
+        "exemptions": [
+            {
+                "exemption_name": "Standard Exemption (Single)",
+                "exemption_amount": 0
+            }
+        ],
+        "childCredit": 2000,
+        "childReduction": 50,
+        "childPhaseOut": 200000,
+        "socialSecurityMax": 128400,
+        "socialSecurityRate": 12.4,
+        "taxableFicaRate": 92.35
+    },
+    "head_of_household": {
+        "medicare_brackets": [
+            {
+                "bracket": 0,
+                "marginal_rate": 2.9,
+                "amount": 0
+            },
+            {
+                "bracket": 200000,
+                "marginal_rate": 3.8,
+                "amount": 5800
+            }
+        ],
+        "income_tax_brackets": [
+            {
+                "bracket": 0,
+                "marginal_rate": 10
+            },
+            {
+                "bracket": 13851,
+                "marginal_rate": 12
+            },
+            {
+                "bracket": 52851,
+                "marginal_rate": 22
+            },
+            {
+                "bracket": 84201,
+                "marginal_rate": 24
+            },
+            {
+                "bracket": 160701,
+                "marginal_rate": 32
+            },
+            {
+                "bracket": 204101,
+                "marginal_rate": 35
+            },
+            {
+                "bracket": 510301,
+                "marginal_rate": 37
+            }
+        ],
+        "deductions": [
+            {
+                "deduction_name": "Standard Deduction (Head of Household)",
+                "deduction_amount": 18350
+            }
+        ],
+        "exemptions": [
+            {
+                "exemption_name": "Standard Exemption (Single)",
+                "exemption_amount": 0
+            }
+        ],
+        "childCredit": 2000,
+        "childReduction": 50,
+        "childPhaseOut": 200000,
+        "socialSecurityMax": 128400,
+        "socialSecurityRate": 12.4,
+        "taxableFicaRate": 92.35
+    }
+}
