@@ -123,13 +123,9 @@ function getIncomeTaxBracketsForFilingStatus(filingStatusName, html) {
         });
         let bracket = parseFloat(level[1]);
         let rate = parseFloat(level[4]);
-        let bracketFormat = bracket ? bracket-1 : bracket;
-        brackets = [...brackets, {bracket: bracketFormat, marginal_rate: rate}] 
+        brackets = [...brackets, {bracket: bracket, marginal_rate: rate}] 
     });
 
-    // Start of parsing magic
-    debugger;
-    //End of parsing magic
     return brackets;
 }
 
