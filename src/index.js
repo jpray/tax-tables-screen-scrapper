@@ -40,35 +40,47 @@ async function getHtmlForState(stateName) {
 //  }
 //
 
-function getBareOutputStructure() {
-    return {
-        "single": {
-            "specialtaxes": [],
-            "deductions": [],
-            "credits": [],
-            "annotations": [],
-            "income_tax_brackets": []
-        },
-        "married": {
-            "specialtaxes": [],
-            "deductions": [],
-            "credits": [],
-            "annotations": [],
-            "income_tax_brackets": []
-        },
-        "married_separately": {
-            "specialtaxes": [],
-            "deductions": [],
-            "credits": [],
-            "annotations": [],
-            "income_tax_brackets": []
-        },
-        "head_of_household": {
-            "specialtaxes": [],
-            "deductions": [],
-            "credits": [],
-            "annotations": [],
-            "income_tax_brackets": []
+async function getBareOutputStructure(stateName) {
+    try {
+        const outputRaw = fs.readFileSync(`./current/${stateName}.json`);
+        const outputResults = JSON.parse(outputRaw);  
+        outputResults[SINGLE][INCOME_TAX_BRACKETS] = [];
+        outputResults[MARRIED_FILING_JOINTLY][INCOME_TAX_BRACKETS] = [];
+        outputResults[MARRIED_FILING_SEPARATELY][INCOME_TAX_BRACKETS] = [];
+        outputResults[HEAD_OF_HOUSEHOLD][INCOME_TAX_BRACKETS] = [];
+        return outputResults;
+    } catch(e) {
+        console.log(e);
+        console.log(`ERROR getting initial output structure for ${stateName}.  Using bare...`);
+        return {
+            "single": {
+                "specialtaxes": [],
+                "deductions": [],
+                "credits": [],
+                "annotations": [],
+                "income_tax_brackets": []
+            },
+            "married": {
+                "specialtaxes": [],
+                "deductions": [],
+                "credits": [],
+                "annotations": [],
+                "income_tax_brackets": []
+            },
+            "married_separately": {
+                "specialtaxes": [],
+                "deductions": [],
+                "credits": [],
+                "annotations": [],
+                "income_tax_brackets": []
+            },
+            "head_of_household": {
+                "specialtaxes": [],
+                "deductions": [],
+                "credits": [],
+                "annotations": [],
+                "income_tax_brackets": []
+            }
         }
     }
 }
@@ -130,7 +142,7 @@ function getIncomeTaxBracketsForFilingStatus(filingStatusName, html) {
     for (let i=0; i<stateNames.length; i++) {
         stateName = stateNames[i];
         const html = await getHtmlForState(stateName[0]);
-        const output = getBareOutputStructure();
+        const output = await getBareOutputStructure(stateName[1]);
         const outputNone = getBareOutputStructureNoTax();
         output[SINGLE][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(1, html);
         output[MARRIED_FILING_JOINTLY][INCOME_TAX_BRACKETS] = getIncomeTaxBracketsForFilingStatus(2, html);
